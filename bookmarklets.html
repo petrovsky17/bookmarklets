@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700|Roboto+Condensed:700|Material+Icons" rel="stylesheet" type="text/css">
+        <link href="https:////static.bab.la/css/bab1-1822.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <a target="_blank" href="javascript:(function(){if(!window.getSelection().toString()){alert('No text selected!');return;};window.open('https://pl.bab.la/slownik/angielski-polski/'+window.getSelection(), 'Translation ')})()">Translate</a>
+        <br><br>
+        <a href="javascript:;" onclick="getTranslation(window.getSelection().toString());">try it!</a>
+        <br><br>
+        <div id="response" style="max-width:900px;"></div>
+        <script type="text/javascript">
+
+            const xhr = new XMLHttpRequest;
+            xhr.responseType = 'document';
+            xhr.onload = function(){
+                if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                    const res = document.querySelector('#response');
+                    res.innerHTML = '';
+                    res.appendChild(xhr.response.querySelector('.page .column-wrapper .content'));
+                    res.querySelector('.quick-result-entry:last-child').remove();
+                } else {
+                    console.log('error', xhr.response);
+                }
+            }
+
+            const getTextSelection = () => {
+                return document.activeElement.getSelection();
+            }
+
+            const getTranslation = function(word){
+                //console.log(getTextSelection());
+                xhr.open('get', 'https://pl.bab.la/slownik/angielski-polski/' + word);
+                xhr.send();
+            }
+
+        </script>
+
+        <iframe src="https://wp.pl" width=400px height=400px border=1></iframe>
+
+        api query fake translation motivated pogrom get
+    </body>
+</html>
