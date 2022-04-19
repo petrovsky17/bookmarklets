@@ -16,6 +16,8 @@
             <a title="RejectAll" href='javascript:Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();'>RejectAll</a>
             <br/>
             <a title="RejectAll" href='javascript:(function(){cifr = document.querySelector("#cmp-iframe").contentDocument;Array.from(cifr.querySelectorAll("button[type=button]")).shift().click();setTimeout(() => {Array.from(cifr.querySelectorAll(".MuiSwitch-root")).forEach((e, i) => i%2 ? e.click(): null);}, 10);setTimeout(() => {const b = Array.from(cifr.querySelectorAll("button[type=button]")); b.pop();b.pop().click();}, 20);})()'>RejectAll2</a>
+            <br/>
+            <a title="RejectAll" href='javascript:(function(){document.querySelector(".cmp-intro_rejectAll").click();setTimeout(()=>{Array.from(document.querySelectorAll(".cmp-switch_isSelected")).forEach(e => e.click());},10);setTimeout(()=>{document.querySelector(".cmp-details_save").click();},20);})()'>Reject All3</a>
         <script type="text/javascript">
             const searchEngines = {
                 'Translate': 'https://pl.bab.la/slownik/angielski-polski/%s',
