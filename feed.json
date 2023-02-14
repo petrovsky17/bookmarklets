@@ -1,0 +1,27 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "test",
+    "description": "",
+    "home_page_url": "https://petrovsky17.github.io",
+    "feed_url": "https://petrovsky17.github.io/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "test"
+    },
+    "items": [
+        {
+            "id": "https://petrovsky17.github.io/test.html",
+            "url": "https://petrovsky17.github.io/test.html",
+            "title": "test",
+            "summary": "test",
+            "content_html": "<p>test</p>",
+            "author": {
+                "name": "test"
+            },
+            "tags": [
+            ],
+            "date_published": "2023-02-14T10:15:11+01:00",
+            "date_modified": "2023-02-14T10:15:11+01:00"
+        }
+    ]
+}
