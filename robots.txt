@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://petrovsky17.github.io/sitemap.xml
