@@ -60,7 +60,7 @@
                         window.open(url, 'Search ');
                 }
                 const insertSearchEngines = () => {
-                        for (name in bookmarklets) {
+                        for (name in searchEngines) {
                                 const link = document.createElement('a');
                                 const func = stringify(searchNow);
                                 const engines = JSON.stringify(searchEngines);
