@@ -28,7 +28,7 @@
                         'Skip TVP': 'setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)',
                         'Reject cookies': 'Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
                 };
-                const searchEngines = {
+                /*const searchEngines = {
                         'Translate': 'https://pl.bab.la/slownik/angielski-polski/%s',
                         'NPM': 'https://www.npmjs.com/package/%s',
                         'NPM search': 'https://www.npmjs.com/search?q=%s',
@@ -65,7 +65,7 @@
                         .replace(/(?:\r\n|\r|\n)/g, ' ')
                         .replace(/ {2}/g, '');
                 }
-                /*const insertSearchEngines = () => {
+                const insertSearchEngines = () => {
                         for (name in bookmarklets) {
                                 const link = document.createElement('a');
                                 const func = stringify(searchNow);
