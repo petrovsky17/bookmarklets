@@ -24,13 +24,9 @@
         <a title="RejectInteria" href='javascript:(function(){document.querySelector(".rodo-popup-settings").click();setTimeout(()=>{Array.from(document.querySelectorAll("label.checked")).forEach(e => e.click());},10);setTimeout(()=>{document.querySelector(".rodo-popup-save").click();},20);})()'>RejectInteria</a>
         --><script type="text/javascript">
                 const bookmarklets = {
-                        'Skip YT Ads': 'javascript:(function(){setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)})()',
-                        'Skip TVP': 'javascript:(function(){setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)})()',
-                        'Reject cookies': 'javascript:Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
-                        'Translate': 'https://pl.bab.la/slownik/angielski-polski/%s',
-                        'NPM': 'https://www.npmjs.com/package/%s',
-                        'NPM search': 'https://www.npmjs.com/search?q=%s',
-                        'SJP': 'https://sjp.pwn.pl/szukaj/%s.html',
+                        'Skip YT Ads': 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)',
+                        'Skip TVP': 'setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)',
+                        'Reject cookies': 'Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
                 };
                 const searchEngines = {
                         'Translate': 'https://pl.bab.la/slownik/angielski-polski/%s',
@@ -69,13 +65,24 @@
                         .replace(/(?:\r\n|\r|\n)/g, ' ')
                         .replace(/ {2}/g, '');
                 }
-                const insertBookmarklets = () => {
+                /*const insertSearchEngines = () => {
                         for (name in bookmarklets) {
                                 const link = document.createElement('a');
                                 const func = stringify(searchNow);
                                 const engines = JSON.stringify(searchEngines);
                                 link.href = 'javascript:(' + func + ')("' + name + '", ' + engines + ')';
                                 link.target = '_blank';
+                                link.innerHTML = name;
+                                document.body.appendChild(link);
+                                document.body.appendChild(document.createElement('br'));
+                        }
+                }*/
+                const insertBookmarklets = () => {
+                        for (name in bookmarklets) {
+                                const link = document.createElement('a');
+                                const func = stringify(bookmarklets[name]);
+                                link.href = `javascript:(function(){${func}})()`;
+                                link.title = name;
                                 link.innerHTML = name;
                                 document.body.appendChild(link);
                                 document.body.appendChild(document.createElement('br'));
