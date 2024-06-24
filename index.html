@@ -28,7 +28,7 @@
                         },
                         {
                                 title: 'E-mail', 
-                                type: 'plain',
+                                type: 'js',
                                 href: 'async function setClipboard(text) {const type = "text/plain"; const blob = new Blob([text], { type }); const data = [new ClipboardItem({ [type]: blob })]; await navigator.clipboard.write(data);} setClipboard("name@name.com");',
                         },
                         {
@@ -98,6 +98,9 @@
                                                 const engines = JSON.stringify(searchEngines);
                                                 link.target = '_blank';
                                                 href += '(' + func + ')("' + item.title + '", ' + engines + ')';
+                                                break;
+                                        case 'js':
+                                                href += item.href;
                                                 break;
                                         case 'plain':
                                                 href = item.href;
