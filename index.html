@@ -153,8 +153,8 @@
                                         default:
                                                 link.href = `javascript:(function(){${stringify(item.href)}})()`;
                                 }
-                                link.innerHTML = item.name;
-                                link.title = item.name;
+                                link.innerHTML = item.title;
+                                link.title = item.title;
                                 document.body.appendChild(link);
                                 document.body.appendChild(document.createElement('br'));
                         }
