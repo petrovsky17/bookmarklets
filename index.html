@@ -23,7 +23,10 @@
         <br/>
         <a title="RejectInteria" href='javascript:(function(){document.querySelector(".rodo-popup-settings").click();setTimeout(()=>{Array.from(document.querySelectorAll("label.checked")).forEach(e => e.click());},10);setTimeout(()=>{document.querySelector(".rodo-popup-save").click();},20);})()'>RejectInteria</a>
         <script type="text/javascript">
-                const searchEngines = {
+                const bookmarklets = {
+                        'Skip YT Ads': 'javascript:(function(){setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)})()',
+                        'Skip TVP': 'javascript:(function(){setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)})()',
+                        'Reject cookies': 'javascript:Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
                         'Translate': 'https://pl.bab.la/slownik/angielski-polski/%s',
                         'NPM': 'https://www.npmjs.com/package/%s',
                         'NPM search': 'https://www.npmjs.com/search?q=%s',
@@ -62,7 +65,7 @@
                         .replace(/ {2}/g, '');
                 }
                 const insertBookmarklets = () => {
-                        for (name in searchEngines) {
+                        for (name in bookmarklets) {
                                 const link = document.createElement('a');
                                 const func = stringify(searchNow);
                                 const engines = JSON.stringify(searchEngines);
@@ -73,46 +76,7 @@
                                 document.body.appendChild(document.createElement('br'));
                         }
                 }
-                //insertBookmarklets();
-
-                /* other */
-                async function dImg(name, src) {
-                        const image = await fetch(src);
-                        const imageBlog = await image.blob();
-                        const imageURL = URL.createObjectURL(imageBlog);
-                        const link = document.createElement('a');
-                        link.href = imageURL;
-                        link.download = name;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                }
-                const lento = () => {
-                        navigator.clipboard.writeText(JSON.stringify({
-                        title:document.querySelector("h2").innerHTML,
-                        phone:window.atob(document.querySelector(".btn-blue.phone-partial.licon-phone-f").dataset.phone),
-                        location:document.querySelector(".userbox-location-city.licon-pin-f").innerHTML,
-                        price:document.querySelector(".price")?document.querySelector(".price").innerHTML.replace("zł","").replace(/ /g,""):null,
-                        description:document.querySelector(".desc.text-15").innerHTML.replace(/<h3.+>.+<\/h3>/,""),
-                        }));
-                        dImg(Date.now(),document.querySelector("#big-img picture img").src);
-                }
-                const o24h = () => {
-                        var lento24={};
-                        navigator.clipboard.readText().then(data=>lento24=JSON.parse(data));
-                        setTimeout(()=>{
-                                Array.from(document.querySelectorAll(".select_kategoria>option")).forEach(e=>e.value==936?e.selected=true:"");
-                                document.querySelector(".select_kategoria").dispatchEvent(newEvent("change"));
-                                Array.from(document.querySelectorAll(".select_kategoria.select_podkategorie>option")).forEach(e=>e.value==976?e.selected=true:"");
-                                Array.from(document.querySelectorAll("select[name=typ]>option")).forEach(e=>e.value==1?e.selected=true:"");
-                                document.querySelector("input[name=tytul]").value=lento24.title;
-                                document.querySelector("input[name=lokalizacja]").value=lento24.location;
-                                document.querySelector("input[name=formularz_kontaktowy]").checked=false;
-                                document.querySelector("input[name=cena]").value=lento24.price;
-                                document.querySelector("input[name=telefon]").value=lento24.phone;
-                                CKEDITOR.instances.opis.setData(lento24.description)
-                        },100);
-                }
+                insertBookmarklets();
         </script>
 </body>
 </html>
