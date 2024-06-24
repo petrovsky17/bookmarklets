@@ -59,12 +59,6 @@
                         const url = searchEngines[engine].replace('%s', selection);
                         window.open(url, 'Search ');
                 }
-                const stringify = (object) => {
-                        return object
-                        .toString()
-                        .replace(/(?:\r\n|\r|\n)/g, ' ')
-                        .replace(/ {2}/g, '');
-                }
                 const insertSearchEngines = () => {
                         for (name in bookmarklets) {
                                 const link = document.createElement('a');
@@ -77,6 +71,12 @@
                                 document.body.appendChild(document.createElement('br'));
                         }
                 }*/
+                const stringify = (object) => {
+                        return object
+                        .toString()
+                        .replace(/(?:\r\n|\r|\n)/g, ' ')
+                        .replace(/ {2}/g, '');
+                }
                 const insertBookmarklets = () => {
                         for (name in bookmarklets) {
                                 const link = document.createElement('a');
