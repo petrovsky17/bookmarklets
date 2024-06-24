@@ -88,6 +88,7 @@
                                 const item = bookmarklets2[name]
                                 const link = document.createElement('a');
                                 let func = '';
+                                let href = 'javascript:';
                                 switch(item.type){
                                         case 'search':
                                                 func = stringify(searchNow);
@@ -96,17 +97,18 @@
                                                         .reduce((o, item) => Object.assign(o, {[item.title]: item.href}), {});
                                                 const engines = JSON.stringify(searchEngines);
                                                 link.target = '_blank';
-                                                link.href = 'javascript:(' + func + ')("' + item.title + '", ' + engines + ')';
+                                                href += '(' + func + ')("' + item.title + '", ' + engines + ')';
                                                 break;
                                         case 'plain':
-                                                link.href = item.href;
+                                                href = item.href;
                                                 break;
                                         case 'iife':
                                         default:
-                                                link.href = `javascript:(function(){${stringify(item.href)}})()`;
+                                                href += `(function(){${stringify(item.href)}})()`;
                                 }
                                 link.innerHTML = item.title;
                                 link.title = item.title;
+                                link.href = href;
                                 document.body.appendChild(link);
                                 document.body.appendChild(document.createElement('br'));
                         }
