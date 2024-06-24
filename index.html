@@ -65,7 +65,7 @@
                                 href: 'https://sjp.pwn.pl/szukaj/%s.html',
                         },
                 ];
-                const bookmarklets = {
+                /*const bookmarklets = {
                         'Skip YT Ads': 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)',
                         'Skip TVP': 'setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)',
                         'Reject cookies': 'Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
@@ -76,7 +76,7 @@
                         'NPM': 'https://www.npmjs.com/package/%s',
                         'NPM search': 'https://www.npmjs.com/search?q=%s',
                         'SJP': 'https://sjp.pwn.pl/szukaj/%s.html',
-                };
+                };*/
                 const xhr = new XMLHttpRequest;
                 xhr.responseType = 'document';
                 xhr.onload = function()
@@ -97,12 +97,8 @@
                         xhr.open('get', 'https://pl.bab.la/slownik/angielski-polski/' + word);
                         xhr.send();
                 }
-                const searchNow = function(engine, searchEngines) {
-                        const selection = window.getSelection().toString();
-                        const url = searchEngines[engine].replace('%s', selection);
-                        window.open(url, 'Search ');
-                }
-                const insertSearchEngines = () => {
+
+                /*const insertSearchEngines = () => {
                         for (name in searchEngines) {
                                 const link = document.createElement('a');
                                 const func = stringify(searchNow);
@@ -114,12 +110,6 @@
                                 document.body.appendChild(document.createElement('br'));
                         }
                 }
-                const stringify = (object) => {
-                        return object
-                        .toString()
-                        .replace(/(?:\r\n|\r|\n)/g, ' ')
-                        .replace(/ {2}/g, '');
-                }
                 const insertBookmarklets = () => {
                         for (name in bookmarklets) {
                                 const link = document.createElement('a');
@@ -130,9 +120,20 @@
                                 document.body.appendChild(link);
                                 document.body.appendChild(document.createElement('br'));
                         }
-                }
+                }*/
                 //insertBookmarklets();
                 //insertSearchEngines();
+                const stringify = (object) => {
+                        return object
+                        .toString()
+                        .replace(/(?:\r\n|\r|\n)/g, ' ')
+                        .replace(/ {2}/g, '');
+                }
+                const searchNow = function(engine, searchEngines) {
+                        const selection = window.getSelection().toString();
+                        const url = searchEngines[engine].replace('%s', selection);
+                        window.open(url, 'Search ');
+                }
                 //<BR/><BR/><BR/>
                 const insertAll = () => {
                         for (name in bookmarklets2) {
@@ -142,6 +143,9 @@
                                 switch(item.type){
                                         case 'search':
                                                 func = stringify(searchNow);
+                                                const searchEngines = bookmarklets2
+                                                        .filter((item, index) => item.type === 'search')
+                                                        .reduce((o, item) => Object.assign(o, {[item.title]: item.href}), {});
                                                 const engines = JSON.stringify(searchEngines);
                                                 link.target = '_blank';
                                                 link.href = 'javascript:(' + func + ')("' + item.title + '", ' + engines + ')';
