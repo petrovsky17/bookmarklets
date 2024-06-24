@@ -23,6 +23,48 @@
         <br/>
         <a title="RejectInteria" href='javascript:(function(){document.querySelector(".rodo-popup-settings").click();setTimeout(()=>{Array.from(document.querySelectorAll("label.checked")).forEach(e => e.click());},10);setTimeout(()=>{document.querySelector(".rodo-popup-save").click();},20);})()'>RejectInteria</a>
         --><script type="text/javascript">
+                const bookmarklets2 = [
+                        {
+                                title: 'Skip YT Ads', 
+                                type: 'iife',
+                                href: 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000);',
+                        },
+                        {
+                                title: 'Skip TVP', 
+                                type: 'iife',
+                                href: 'setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)',
+                        },
+                        {
+                                title: 'Cookies', 
+                                type: 'iife',
+                                href: 'Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();',
+                        },
+                        {
+                                title: 'E-mail', 
+                                type: 'plain',
+                                href: 'async function setClipboard(text) {const type = "text/plain"; const blob = new Blob([text], { type }); const data = [new ClipboardItem({ [type]: blob })]; await navigator.clipboard.write(data);} setClipboard("name@name.com");',
+                        },
+                        {
+                                title: 'Translate', 
+                                type: 'search',
+                                href: 'https://pl.bab.la/slownik/angielski-polski/%s',
+                        },
+                        {
+                                title: 'npm', 
+                                type: 'search',
+                                href: 'https://www.npmjs.com/package/%s',
+                        },
+                        {
+                                title: 'npm search', 
+                                type: 'search',
+                                href: 'https://www.npmjs.com/search?q=%s',
+                        },
+                        {
+                                title: 'sjp', 
+                                type: 'search',
+                                href: 'https://sjp.pwn.pl/szukaj/%s.html',
+                        },
+                ];
                 const bookmarklets = {
                         'Skip YT Ads': 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)',
                         'Skip TVP': 'setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)',
@@ -89,8 +131,33 @@
                                 document.body.appendChild(document.createElement('br'));
                         }
                 }
-                insertBookmarklets();
-                insertSearchEngines();
+                //insertBookmarklets();
+                //insertSearchEngines();
+                <br/><br/><br/>
+                const insertAll = () => {
+                        for (name in bookmarklets2) {
+                                const item = bookmarklets2[name]
+                                const link = document.createElement('a');
+                                let func = '';
+                                switch(item.type){
+                                        case 'search':
+                                                func = stringify(searchNow);
+                                                const engines = JSON.stringify(searchEngines);
+                                                link.target = '_blank';
+                                                link.href = 'javascript:(' + func + ')("' + item.title + '", ' + engines + ')';
+                                                brak;
+                                        case 'plain':
+                                                link.href = 'javascript:' + stringify(item.href);
+                                        case 'iife':
+                                        default:
+                                                link.href = `javascript:(function(){${stringify(item.href)}})()`;
+                                }
+                                link.innerHTML = name;
+                                document.body.appendChild(link);
+                                document.body.appendChild(document.createElement('br'));
+                        }
+                }
+                insertAll();
         </script>
 </body>
 </html>
