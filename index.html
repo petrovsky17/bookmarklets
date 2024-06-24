@@ -11,6 +11,8 @@
         <h5>Bookmarks:<h5>
         <a title="Skip YT Ads" href='javascript:(function(){setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000)})()'>Skip YT Ads</a>
         <br/>
+        <a title="Skip TVP" href='javascript:(function(){setInterval(() => document.querySelector(".ui-player-advert__info") ? document.querySelector("video[title=Advertisement]").playbackRate=16 : null, 1000)})()'>Skip YT Ads</a>
+        <br/>
         <a title="E-mail" href='javascript: async function setClipboard(text) {const type = "text/plain"; const blob = new Blob([text], { type }); const data = [new ClipboardItem({ [type]: blob })]; await navigator.clipboard.write(data);} setClipboard("krzysztof.kaplon@aldi-techhub.pl");'>E-mail</a>
         <br/>
         <a title="Reject" href='javascript:Array.from(document.querySelectorAll(".fc-preference-slider > input[type=checkbox]")).forEach(e => e.checked = false);document.querySelector(".fc-confirm-choices").click();'>Reject</a>
