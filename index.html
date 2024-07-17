@@ -14,7 +14,7 @@
                         {
                                 title: 'Skip YT Ads', 
                                 type: 'iife',
-                                href: 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); b?b.click():null;}, 1000);',
+                                href: 'setInterval(()=>{document.querySelector(".video-ads.ytp-ad-module").children.length ? document.querySelector("video").playbackRate = 16 : null;b=document.querySelector(".ytp-skip-ad-button"); if(b){b.click();v.playbackRate=1;}}, 1000);',
                         },
                         {
                                 title: 'Skip TVP', 
